@@ -1,0 +1,35 @@
+
+services:
+  api:
+    build: .
+    restart: always
+    container_name: pokemon-game-api
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql://${PG_USER-pokemon}:${PG_DATABASE:-pokemon}@db:$PG_PORT/${PG_DATABASE:-pokemon}?schema=public
+    ports:
+      - "${API_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    container_name: pokemon-postgres-db
+    restart: always
+    environment:
+      - POSTGRES_DB=${PG_DATABASE:-pokemon}
+      - POSTGRES_USER=${PG_USER:-pokemon}
+      - POSTGRES_PASSWORD=${PG_DATABASE:-pokemon}
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-p", "${PG_PORT:-5432}", "-U", "${PG_USER}"]
+      interval: 60s
+      timeout: 20s
+      retries: 3
+
+volumes:
+  postgres-data:
