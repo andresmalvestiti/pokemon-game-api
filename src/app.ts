@@ -1,15 +1,12 @@
-// src/app.ts
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
-import router from './routes/users';
+import router from './routes/cards';
 
-const prisma = new PrismaClient();
 const app = express();
 
 app.use(express.json());
 
-// Rutas
-app.use('/users', router);
+// Routes
+app.use('/cards', router);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -1,0 +1,57 @@
+{
+  "pokemonEnergyTypes": {
+    "1": "Grass",
+    "2": "Fire",
+    "3": "Water",
+    "4": "Lightning",
+    "5": "Psychic",
+    "6": "Fighting",
+    "7": "Darkness",
+    "8": "Metal",
+    "9": "Fairy",
+    "10": "Dragon",
+    "11": "Colorless"
+  },
+  "cards": [
+    {
+      "name": "Pikachu",
+      "elementId": 4,
+      "hp": 60,
+      "attack": 20,
+      "weaknessId": 6,
+      "weaknessMultiplier": 2,
+      "resistanceId": 8,
+      "resistanceValue": -20
+    },
+    {
+      "name": "Feraligatr",
+      "elementId": 3,
+      "hp": 180,
+      "attack": 160,
+      "weaknessId": 4,
+      "weaknessMultiplier": 2,
+      "resistanceId": null,
+      "resistanceValue": 0
+    },
+    {
+      "name": "Charizard",
+      "elementId": 2,
+      "hp": 180,
+      "attack": 120,
+      "weaknessId": 3,
+      "weaknessMultiplier": 2,
+      "resistanceId": null,
+      "resistanceValue": 0
+    },
+    {
+      "name": "Scizor",
+      "elementId": 8,
+      "hp": 120,
+      "attack": 60,
+      "weaknessId": 2,
+      "weaknessMultiplier": 2,
+      "resistanceId": 5,
+      "resistanceValue": -20
+    }
+  ]
+}

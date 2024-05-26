@@ -13,7 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+model Card {
+  id                  Int          @id @default(autoincrement())
+  name                String       @unique
+  elementId           Int
+  hp                  Int
+  attack              Int
+  weaknessId          Int
+  weaknessMultiplier  Int
+  resistanceId        Int?
+  resistanceValue     Int?
+
+  element             Element @relation("element" ,fields: [elementId], references: [id])
+  weakness            Element @relation("weakness" ,fields: [weaknessId], references: [id])
+  resistance          Element? @relation("resistance", fields: [resistanceId], references: [id])
+}
+
+model Element {
+  id               Int          @id @default(autoincrement())
+  name             String
+  Cardsweaknesess  Card[] @relation("weakness")
+  Cardsresistances Card[] @relation("resistance")
+  CardsElements    Card[] @relation("element")
 }
