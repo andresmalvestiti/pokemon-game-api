@@ -7,8 +7,9 @@ services:
     env_file: .env
     environment:
       - DATABASE_URL=postgresql://${PG_USER-pokemon}:${PG_DATABASE:-pokemon}@db:$PG_PORT/${PG_DATABASE:-pokemon}?schema=public
+      - CORS_ORIGIN=${CORS_ORIGIN}
     ports:
-      - "${API_PORT:-3000}:3000"
+      - "${API_PORT:-8000}:8000"
     depends_on:
       db:
         condition: service_healthy

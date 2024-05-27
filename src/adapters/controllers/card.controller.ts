@@ -37,9 +37,13 @@ export class CardController {
     }
   };
 
-  findById = async (_: Request, response: Response): Promise<Response> => {
+  findById = async (
+    request: Request,
+    response: Response,
+  ): Promise<Response> => {
     try {
-      const cards = await this.cardService.findAll();
+      const cardId = Number(request.params.id);
+      const cards = await this.cardService.findById(cardId);
       return response.status(200).json(cards);
     } catch (error) {
       return response.status(500);

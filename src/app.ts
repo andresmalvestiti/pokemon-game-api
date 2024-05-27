@@ -1,12 +1,21 @@
 import express from 'express';
-import router from './routes/cards';
+import cors from 'cors';
+import { router as cardRouter } from './routes/cards';
+import { router as battleRouter } from './routes/battles';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+  }),
+);
 
 app.use(express.json());
 
 // Routes
-app.use('/cards', router);
+app.use('/cards', cardRouter);
+app.use('/battle', battleRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

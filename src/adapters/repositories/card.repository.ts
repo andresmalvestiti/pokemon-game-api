@@ -39,7 +39,6 @@ export class CardRepository implements ICardRepository {
   update = async (card: Partial<CardDTO>): Promise<Card> => {
     const { resistance, weakness, element, id, ...commonValues } = card;
     try {
-      console.log('entra a update');
       return await this.prisma.card.update({
         data: {
           ...commonValues,
@@ -57,7 +56,6 @@ export class CardRepository implements ICardRepository {
         },
       });
     } catch (error) {
-      console.log('error', error);
       throw new Error('Error in card repository');
     }
   };
@@ -86,7 +84,9 @@ export class CardRepository implements ICardRepository {
 
   findAll = async (): Promise<Card[]> => {
     try {
-      return await this.prisma.card.findMany();
+      return await this.prisma.card.findMany({
+        include: { element: true, resistance: true, weakness: true },
+      });
     } catch (error) {
       throw new Error('Error in card repository');
     }
